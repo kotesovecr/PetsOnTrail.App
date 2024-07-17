@@ -1,0 +1,47 @@
+﻿@inherits ExcelTableBase
+
+<div class="container">
+    <div class="row">
+        @foreach (var column in Columns)
+        {
+            <div class="col">
+                <button @onclick="() => ShowColumn(column)">Show</button>
+                <button @onclick="() => HideColumn(column)">Hide</button>
+                <button @onclick="() => SortBy(column)">Sort</button>
+            </div>
+        }
+    </div>
+</div>
+<table class="excel-table">
+    <thead>
+        <tr>
+            @foreach (var column in Columns)
+            {
+                if (!column.Hidden)
+                {
+                    <th @onmousedown="@(e => OnMouseDown(e, column))" style="width: @(column.Width)px;">
+                        @column.Header
+                        <button @onclick="() => HideColumn(column)">Hide</button>
+                        <button @onclick="() => SortBy(column)">Sort</button>
+                    </th>
+                }
+            }
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var row in Data)
+        {
+            <tr>
+                @foreach (var column in Columns)
+                {
+                    if (!column.Hidden)
+                    {
+                        <td style="width: @(column.Width)px;">
+                            <PetsOnTrail.App.Components.General.EditableInput.EditableInput Value="@row[column.Id]" OnValueChange="(val) => OnValueChange(row, column.Id, val)" Type="@column.Type" />
+                        </td>
+                    }
+                }
+            </tr>
+        }
+    </tbody>
+</table>

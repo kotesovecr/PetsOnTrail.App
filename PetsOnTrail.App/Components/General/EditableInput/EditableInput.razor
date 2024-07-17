@@ -1,0 +1,24 @@
+﻿@inherits EditableInputBase
+
+@switch (Type)
+{
+    case InputType.Text:
+        <input @bind="@TextValue" />
+        break;
+
+    case InputType.Integer:
+        <input type="number" @bind="@IntegerValue" />
+        break;
+
+    case InputType.Double:
+        <input type="number" step="0.01" @bind="@DoubleValue" />
+        break;
+
+    case InputType.Date:
+        <PetsOnTrail.App.Components.General.DateTimeInput.DateTimeInput Value="@DateValue" OnTimeUpdate="(val) => DateValue = val"/>
+        break;
+
+    default:
+        <input @bind="@Value" />
+        break;
+}

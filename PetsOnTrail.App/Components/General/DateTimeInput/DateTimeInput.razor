@@ -1,0 +1,11 @@
+﻿@inherits DateTimeInputBase
+
+<input 
+    id="@inputId" 
+    class="simple-datetime" 
+    @bind=" inputValue" 
+    @bind:event="oninput" 
+    @onchange="FormatInput" 
+    placeholder="Enter time as HHMM or DDHHMM" 
+/>
+<p>@Value?.ToLocalTime()</p>

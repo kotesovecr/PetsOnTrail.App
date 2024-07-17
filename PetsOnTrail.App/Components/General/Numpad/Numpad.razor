@@ -1,0 +1,20 @@
+﻿@inherits NumpadBase
+
+<div class="numpad-overlay" @onclick="CloseNumpad">
+    <div class="numpad-container" @onclick:stopPropagation>
+        <div class="numpad">
+            <button @onclick="() => AppendNumber(7.ToString())">7</button>
+            <button @onclick="() => AppendNumber(8.ToString())">8</button>
+            <button @onclick="() => AppendNumber(9.ToString())">9</button>
+            <button @onclick="() => AppendNumber(4.ToString())">4</button>
+            <button @onclick="() => AppendNumber(5.ToString())">5</button>
+            <button @onclick="() => AppendNumber(6.ToString())">6</button>
+            <button @onclick="() => AppendNumber(1.ToString())">1</button>
+            <button @onclick="() => AppendNumber(2.ToString())">2</button>
+            <button @onclick="() => AppendNumber(3.ToString())">3</button>
+            <button class="cancel" @onclick="Cancel">Cancel</button>
+            <button @onclick="() => AppendNumber(0.ToString())">0</button>
+            <button class="ok" @onclick="OK">OK</button>
+        </div>
+    </div>
+</div>
