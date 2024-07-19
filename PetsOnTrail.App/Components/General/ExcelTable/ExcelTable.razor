@@ -1,13 +1,14 @@
 ﻿@inherits ExcelTableBase
+@inject PetsOnTrail.Translation.ITranslationService T
 
 <div class="container">
     <div class="row">
         @foreach (var column in Columns)
         {
             <div class="col">
-                <button @onclick="() => ShowColumn(column)">Show</button>
-                <button @onclick="() => HideColumn(column)">Hide</button>
-                <button @onclick="() => SortBy(column)">Sort</button>
+                <button @onclick="() => ShowColumn(column)">@T.Translate("general.excel-table.show")</button>
+                <button @onclick="() => HideColumn(column)">@T.Translate("general.excel-table.hide")</button>
+                <button @onclick="() => SortBy(column)">@T.Translate("general.excel-table.sort")</button>
             </div>
         }
     </div>

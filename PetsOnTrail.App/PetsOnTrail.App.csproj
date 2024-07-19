@@ -8,12 +8,27 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\Translations\cs.json" />
+    <Content Remove="wwwroot\Translations\en-US.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Translations\cs.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="wwwroot\Translations\en-US.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="7.0.15" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="7.0.15" PrivateAssets="all" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PetsOnTrail.Persistence\PetsOnTrail.Persistence.csproj" />
+    <ProjectReference Include="..\PetsOnTrail.Translation\PetsOnTrail.Translation.csproj" />
   </ItemGroup>
 
   <ItemGroup>

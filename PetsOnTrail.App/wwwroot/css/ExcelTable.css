@@ -7,7 +7,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-    .excel-table th, .excel-table td {
+    th, td {
         border: 1px solid #ddd;
         padding: 8px;
         position: relative;
@@ -15,21 +15,21 @@
         text-align: left;
     }
 
-    .excel-table th {
+    th {
         cursor: col-resize;
         background-color: #f4f4f4;
     }
 
-    .excel-table th button {
-        margin-left: 5px;
-    }
+        button {
+            margin-left: 5px;
+        }
 
-    .excel-table tbody td {
+    tbody td {
         border: 1px solid #ddd;
         padding: 10px;
     }
 
-        .excel-table tbody td input {
+        input {
             width: 100%;
             border: none;
             padding: 10px;
@@ -37,11 +37,11 @@
             font-size: 16px;
         }
 
-        .excel-table tbody td input:focus {
+        input:focus {
             outline: none;
             background-color: #e6f7ff;
         }
 
-    .excel-table tbody tr:nth-child(even) {
-        background-color: #f9f9f9;
+    tbody tr:nth-child(even) {
+        background-color: #cde9de;
     }

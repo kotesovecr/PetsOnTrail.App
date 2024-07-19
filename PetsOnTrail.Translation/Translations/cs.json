@@ -1,0 +1,11 @@
+{
+  "general": {
+    "excel-table": {
+      "sort": "Seřadit",
+      "hide": "Skrýt",
+      "show": "Zobrazit",
+      "filter": "Filtrovat",
+      "toggle": "Skrýt-zobrazit",
+    }
+  }
+}

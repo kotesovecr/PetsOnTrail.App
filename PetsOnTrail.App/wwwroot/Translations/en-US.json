@@ -1,0 +1,11 @@
+{
+  "general": {
+    "excel-table": {
+      "sort": "Sort",
+      "hide": "Hide",
+      "show": "Show",
+      "filter": "Filter",
+      "toggle": "Toggle"
+    }
+  }
+}

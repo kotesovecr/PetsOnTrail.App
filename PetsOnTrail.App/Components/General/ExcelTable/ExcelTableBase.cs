@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using PetsOnTrail.App.Components.General.EditableInput;
+using PetsOnTrail.Translation;
 
 namespace PetsOnTrail.App.Components.General.ExcelTable;
 
@@ -13,6 +14,7 @@ public class ExcelTableBase : ComponentBase
     private static Guid _column4Id = Guid.Parse("9720f620-8f3c-4837-ae82-b2c2907e78d9");
 
     [Inject] protected IJSRuntime JSRuntime { get; set; }
+    [Inject] protected ITranslationService T { get; set; }
 
     protected virtual List<ColumnDefinition> Columns { get; set; } = new List<ColumnDefinition>
     {
@@ -103,8 +105,10 @@ public class ExcelTableBase : ComponentBase
         // Ensure proper cleanup
     }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
+        await T.SetLanguage("en-US");
+
         base.OnInitialized();
         // Subscribe to mouse events
         var dotNetRef = DotNetObjectReference.Create(this);
