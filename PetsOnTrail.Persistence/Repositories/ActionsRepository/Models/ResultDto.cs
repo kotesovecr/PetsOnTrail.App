@@ -12,10 +12,4 @@ public sealed record ResultDto
     public IList<CheckpointDto> Checkpoints { get; set; } = new List<CheckpointDto>();
     public DateTimeOffset? Finish { get; set; }
     public string Note { get; set; } = string.Empty;
-
-    public sealed record CheckpointDto
-    {
-        public Guid Id { get; set; }
-        public DateTimeOffset? Time { get; set; }
-    }
 }

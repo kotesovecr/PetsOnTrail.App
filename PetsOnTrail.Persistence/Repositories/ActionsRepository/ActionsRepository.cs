@@ -12,6 +12,12 @@ internal class ActionsRepository : IActionsRepository
     public ActionsRepository(ILocalStorageService localStorage)
     {
         _localStorage = localStorage;
+
+        // Seed data
+        foreach (var action in TestingData.GetActions())
+        {
+            _localStorage.SetItemAsync($"{_prefix}{action.Id}", action, CancellationToken.None);
+        }
     }
 
     public async Task<ActionDto> AddOrUpdateCheckpointOfResultAsync(Guid actionId, Guid raceId, Guid categoryId, Guid resultId, Guid checkpointId, DateTimeOffset? time, CancellationToken cancellationToken)
@@ -28,7 +34,7 @@ internal class ActionsRepository : IActionsRepository
             result.Checkpoints.Remove(result.Checkpoints.FirstOrDefault(checkpoint => checkpoint.Id == checkpointId)!);
         }
 
-        result!.Checkpoints.Add(new ResultDto.CheckpointDto { Id = checkpointId, Time = time });
+        result!.Checkpoints.Add(new CheckpointDto { Id = checkpointId, Time = time ?? DateTimeOffset.UtcNow });
 
         var response = await UpdateActionAsync(action!, cancellationToken);
 

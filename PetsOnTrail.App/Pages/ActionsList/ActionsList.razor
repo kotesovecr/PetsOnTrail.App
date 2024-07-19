@@ -1,0 +1,21 @@
+﻿@page "/actionslist"
+
+@inherits PetsOnTrail.App.Pages.ActionsList.ActionsListBase
+
+<h3>ActionsList</h3>
+
+<p>This is the ActionsList page.</p>
+
+
+@foreach (var action in Actions)
+{
+    <div>
+        <a href="/actiondetail/@action.Id">@action.Name</a>
+        @foreach (var race in action.Races)
+        {
+            <div>
+                @race.Name
+            </div>
+        }
+    </div>
+}
