@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using PetsOnTrail.App;
+using PetsOnTrail.Authentication;
 using PetsOnTrail.Persistence;
 using PetsOnTrail.Translation;
 
@@ -10,6 +11,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services
     .AddHttpClient()
+    .AddAuthentication(builder.Configuration)
     .AddPersistence()
     .AddTranslation(builder.HostEnvironment.BaseAddress)
     .AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });

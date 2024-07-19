@@ -1,0 +1,17 @@
+﻿@page "/"
+@using Microsoft.AspNetCore.Components.Authorization
+
+@inherits PetsOnTrail.App.Pages.Index.IndexBase
+
+<h1>Hello, world!</h1>
+
+<AuthorizeView>
+    <Authorized>
+        <p>Welcome to PetsOnTrail!</p>
+        <PetsOnTrail.App.Components.General.ExcelTable.ExcelTable>
+        </PetsOnTrail.App.Components.General.ExcelTable.ExcelTable>
+    </Authorized>
+    <NotAuthorized>
+        <p>Not logged in -> <a href="/authentication/login">Login</a></p>
+    </NotAuthorized>
+</AuthorizeView>

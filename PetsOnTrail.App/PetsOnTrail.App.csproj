@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PetsOnTrail.Authentication\PetsOnTrail.Authentication.csproj" />
     <ProjectReference Include="..\PetsOnTrail.Persistence\PetsOnTrail.Persistence.csproj" />
     <ProjectReference Include="..\PetsOnTrail.Translation\PetsOnTrail.Translation.csproj" />
   </ItemGroup>

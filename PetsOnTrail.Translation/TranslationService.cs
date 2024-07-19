@@ -17,6 +17,7 @@ internal class TranslationService : ITranslationService
     public async Task SetLanguage(string language)
     {
         _language = language;
+
         await ReloadAsync();
     }
 

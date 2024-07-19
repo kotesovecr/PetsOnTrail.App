@@ -26,9 +26,9 @@ public class ExcelTableBase : ComponentBase
 
     protected virtual List<Dictionary<Guid, object>> Data { get; set; } = new List<Dictionary<Guid, object>>
     {
-        new Dictionary<Guid, object> { { _column1Id, "John Doe" }, { _column2Id, 30 }, { _column3Id, "USA" }, { _column4Id, DateTimeOffset.Now } },
-        new Dictionary<Guid, object> { { _column1Id, "Jane Smith" }, { _column2Id, 25 }, { _column3Id, "UK" }, { _column4Id, DateTimeOffset.Now.AddDays(-1) } },
-        new Dictionary<Guid, object> { { _column1Id, "Samuel Johnson" }, { _column2Id, 35 }, { _column3Id, "Canada" }, { _column4Id, DateTimeOffset.Now.AddDays(-2) } }
+        new Dictionary<Guid, object> { { _column1Id, "Johnie Doe" }, { _column2Id, 30 }, { _column3Id, "USA" }, { _column4Id, DateTimeOffset.Now } },
+        new Dictionary<Guid, object> { { _column1Id, "Janie Smith" }, { _column2Id, 25 }, { _column3Id, "UK" }, { _column4Id, DateTimeOffset.Now.AddDays(-1) } },
+        new Dictionary<Guid, object> { { _column1Id, "Samuel Jackson" }, { _column2Id, 35 }, { _column3Id, "Canada" }, { _column4Id, DateTimeOffset.Now.AddDays(-2) } }
     };
 
     private bool isResizing = false;

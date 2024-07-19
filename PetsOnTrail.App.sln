@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetsOnTrail.Persistence", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetsOnTrail.Translation", "PetsOnTrail.Translation\PetsOnTrail.Translation.csproj", "{A35EAF04-86B3-4BFA-BDE4-7F33D18ED63F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetsOnTrail.Authentication", "PetsOnTrail.Authentication\PetsOnTrail.Authentication.csproj", "{27E938F2-16C8-4923-9D74-4BEA2723257F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A35EAF04-86B3-4BFA-BDE4-7F33D18ED63F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A35EAF04-86B3-4BFA-BDE4-7F33D18ED63F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A35EAF04-86B3-4BFA-BDE4-7F33D18ED63F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27E938F2-16C8-4923-9D74-4BEA2723257F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27E938F2-16C8-4923-9D74-4BEA2723257F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27E938F2-16C8-4923-9D74-4BEA2723257F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27E938F2-16C8-4923-9D74-4BEA2723257F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
