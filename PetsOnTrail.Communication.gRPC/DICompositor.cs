@@ -41,7 +41,8 @@ public static class DICompositor
             .AddAuthorizedGrpcOverWebClient<Protos.Activities.Activities.ActivitiesClient>(configuration["GrpcServerUri"]);
 
         typeAdapterConfig
-            .AddGetActionResponse();
+            .AddGetActionResponse()
+            .AddGetActionsResponse();
 
         typeAdapterConfig.NewConfig<Google.Type.DateTime, DateTimeOffset?>().Map(d => d, s => s.ToDateTimeOffset());
         typeAdapterConfig.NewConfig<Google.Type.DateTime, DateTimeOffset>().Map(d => d, s => s.ToDateTimeOffset());

@@ -11,38 +11,39 @@ internal static class TestingData
             Id = Guid.NewGuid(),
             Name = "Action 1",
             Description = "Description 1",
-            Start = DateTimeOffset.Now,
-            Finish = DateTimeOffset.Now.AddHours(1),
-            Races = new List<RaceDto>
+            Term = new ActionDto.TermDto
             {
-                new RaceDto
+                From = DateTimeOffset.Now,
+                To = DateTimeOffset.Now.AddHours(1)
+            },            
+            Races = new List<ActionDto.RaceDto>
+            {
+                new ActionDto.RaceDto
                 {
                     Id = Guid.NewGuid(),
                     Name = "Race 1",
-                    Categories = new List<CategoryDto>
+                    Categories = new List<ActionDto.CategoryDto>
                     {
-                        new CategoryDto
+                        new ActionDto.CategoryDto
                         {
                             Id = Guid.NewGuid(),
                             Name = "Category 1",
                             Description = "Description 1",
-                            Results = new List<ResultDto>
+                            Racers = new List<ActionDto.RacerDto>
                             {
-                                new ResultDto
+                                new ActionDto.RacerDto
                                 {
                                     Id = Guid.NewGuid(),
-                                    RaceId = Guid.NewGuid(),
-                                    CategoryId = Guid.NewGuid(),
                                     FirstName = "First Name 1",
                                     LastName = "Last Name 1",
                                     Start = DateTimeOffset.Now.AddHours(1),
                                     Finish = DateTimeOffset.Now.AddHours(2),
-                                    Checkpoints = new List<CheckpointDto>
+                                    PassedCheckpoints = new List<ActionDto.PassedCheckpointDto>
                                     {
-                                        new CheckpointDto
+                                        new ActionDto.PassedCheckpointDto
                                         {
                                             Id = Guid.NewGuid(),
-                                            Time = DateTimeOffset.Now
+                                            Passed = DateTimeOffset.Now
                                         }
                                     }
                                 }
@@ -57,38 +58,39 @@ internal static class TestingData
             Id = Guid.NewGuid(),
             Name = "Action 2",
             Description = "Description 2",
-            Start = DateTimeOffset.Now,
-            Finish = DateTimeOffset.Now.AddHours(1),
-            Races = new List<RaceDto>
+            Term = new ActionDto.TermDto
             {
-                new RaceDto
+                From = DateTimeOffset.Now,
+                To = DateTimeOffset.Now.AddHours(1)
+            },
+            Races = new List<ActionDto.RaceDto>
+            {
+                new ActionDto.RaceDto
                 {
                     Id = Guid.NewGuid(),
                     Name = "Race 2",
-                    Categories = new List<CategoryDto>
+                    Categories = new List<ActionDto.CategoryDto>
                     {
-                        new CategoryDto
+                        new ActionDto.CategoryDto
                         {
                             Id = Guid.NewGuid(),
                             Name = "Category 2",
                             Description = "Description 2",
-                            Results = new List<ResultDto>
+                            Racers = new List<ActionDto.RacerDto>
                             {
-                                new ResultDto
+                                new ActionDto.RacerDto
                                 {
                                     Id = Guid.NewGuid(),
-                                    RaceId = Guid.NewGuid(),
-                                    CategoryId = Guid.NewGuid(),
                                     FirstName = "First Name 2",
                                     LastName = "Last Name 2",
                                     Start = DateTimeOffset.Now.AddHours(3),
                                     Finish = DateTimeOffset.Now.AddHours(4),
-                                    Checkpoints = new List<CheckpointDto>
+                                    PassedCheckpoints = new List<ActionDto.PassedCheckpointDto>
                                     {
-                                        new CheckpointDto
+                                        new ActionDto.PassedCheckpointDto
                                         {
                                             Id = Guid.NewGuid(),
-                                            Time = DateTimeOffset.Now
+                                            Passed = DateTimeOffset.Now
                                         }
                                     }
                                 }

@@ -1,6 +1,4 @@
-﻿using Google.Protobuf.WellKnownTypes;
-
-namespace PetsOnTrail.Communication.gRPC.Models;
+﻿namespace PetsOnTrail.Communication.gRPC.Models;
 
 public sealed record GetActionResponse
 {

@@ -7,6 +7,7 @@ using PetsOnTrail.Translation;
 using PetsOnTrail.Communication;
 using Mapster;
 using Google.Protobuf.Collections;
+using MapsterMapper;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -33,10 +34,11 @@ var typeAdapterConfig = new TypeAdapterConfig
 builder.Services
     .AddHttpClient()
     .AddAuthentication(builder.Configuration)
-    .AddPersistence()
+    .AddPersistence(typeAdapterConfig)
     .AddTranslation(builder.HostEnvironment.BaseAddress)
     .AddCommunication(builder.Configuration, typeAdapterConfig)
     .AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) })
+    .AddScoped<IMapper, ServiceMapper>()
     .AddSingleton(typeAdapterConfig);
 
 await builder.Build().RunAsync();

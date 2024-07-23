@@ -1,5 +1,5 @@
-﻿
-using Blazored.LocalStorage;
+﻿using Blazored.LocalStorage;
+using MapsterMapper;
 using PetsOnTrail.Persistence.Repositories.ActionsRepository.Models;
 
 namespace PetsOnTrail.Persistence.Repositories.ActionsRepository;
@@ -8,16 +8,20 @@ internal class ActionsRepository : IActionsRepository
 {
     private const string _prefix = "actions_";
     private readonly ILocalStorageService _localStorage;
+    private readonly PetsOnTrail.Communication.gRPC.Interfaces.IActionsRepository _actionsRemoteRepository;
+    private readonly IMapper _mapper;
 
-    public ActionsRepository(ILocalStorageService localStorage)
+    public ActionsRepository(ILocalStorageService localStorage, PetsOnTrail.Communication.gRPC.Interfaces.IActionsRepository actionsRemoteRepository, IMapper mapper)
     {
         _localStorage = localStorage;
+        _actionsRemoteRepository = actionsRemoteRepository;
+        _mapper = mapper;
 
-        // Seed data
-        foreach (var action in TestingData.GetActions())
-        {
-            _localStorage.SetItemAsync($"{_prefix}{action.Id}", action, CancellationToken.None);
-        }
+        //// Seed data
+        //foreach (var action in TestingData.GetActions())
+        //{
+        //    _localStorage.SetItemAsync($"{_prefix}{action.Id}", action, CancellationToken.None);
+        //}
     }
 
     public async Task<ActionDto> AddOrUpdateCheckpointOfResultAsync(Guid actionId, Guid raceId, Guid categoryId, Guid resultId, Guid checkpointId, DateTimeOffset? time, CancellationToken cancellationToken)
@@ -26,15 +30,15 @@ internal class ActionsRepository : IActionsRepository
 
         var result = action?.Races
                 .FirstOrDefault(race => race.Id == raceId)?.Categories
-                .FirstOrDefault(category => category.Id == categoryId)?.Results
+                .FirstOrDefault(category => category.Id == categoryId)?.Racers
                 .FirstOrDefault(result => result.Id == resultId);
 
-        if (result != null && result.Checkpoints.FirstOrDefault(checkpoint => checkpoint.Id == checkpointId) != null)
+        if (result != null && result.PassedCheckpoints.FirstOrDefault(checkpoint => checkpoint.Id == checkpointId) != null)
         {
-            result.Checkpoints.Remove(result.Checkpoints.FirstOrDefault(checkpoint => checkpoint.Id == checkpointId)!);
+            result.PassedCheckpoints.Remove(result.PassedCheckpoints.FirstOrDefault(checkpoint => checkpoint.Id == checkpointId)!);
         }
 
-        result!.Checkpoints.Add(new CheckpointDto { Id = checkpointId, Time = time ?? DateTimeOffset.UtcNow });
+        result!.PassedCheckpoints.Add(new ActionDto.PassedCheckpointDto { Id = checkpointId, Passed = time ?? DateTimeOffset.UtcNow });
 
         var response = await UpdateActionAsync(action!, cancellationToken);
 
@@ -47,7 +51,7 @@ internal class ActionsRepository : IActionsRepository
 
         var result = action?.Races
                 .FirstOrDefault(race => race.Id == raceId)?.Categories
-                .FirstOrDefault(category => category.Id == categoryId)?.Results
+                .FirstOrDefault(category => category.Id == categoryId)?.Racers
                 .FirstOrDefault(result => result.Id == resultId);
 
         if (result != null)
@@ -58,17 +62,17 @@ internal class ActionsRepository : IActionsRepository
         return response;
     }
 
-    public async Task<ActionDto> AddOrUpdateResultAsync(Guid actionId, Guid raceId, Guid categoryId, ResultDto result, CancellationToken cancellationToken)
+    public async Task<ActionDto> AddOrUpdateResultAsync(Guid actionId, Guid raceId, Guid categoryId, ActionDto.RacerDto racer, CancellationToken cancellationToken)
     {
         var action = await GetActionAsync(actionId, cancellationToken);
 
         var category = action?.Races.FirstOrDefault(race => race.Id == raceId)?.Categories.FirstOrDefault(category => category.Id == categoryId);
-        if (category != null && category.Results.FirstOrDefault(r => r.Id == result.Id) != null)
+        if (category != null && category.Racers.FirstOrDefault(r => r.Id == racer.Id) != null)
         { 
-            category.Results.Remove(category.Results.FirstOrDefault(r => r.Id == result.Id)!);
+            category.Racers.Remove(category.Racers.FirstOrDefault(r => r.Id == racer.Id)!);
         }
 
-        category?.Results.Add(result);
+        category?.Racers.Add(racer);
 
         var response = await UpdateActionAsync(action!, cancellationToken);
 
@@ -81,7 +85,7 @@ internal class ActionsRepository : IActionsRepository
 
         var result = action?.Races
                 .FirstOrDefault(race => race.Id == raceId)?.Categories
-                .FirstOrDefault(category => category.Id == categoryId)?.Results
+                .FirstOrDefault(category => category.Id == categoryId)?.Racers
                 .FirstOrDefault(result => result.Id == resultId);
 
         if (result != null)
@@ -111,11 +115,20 @@ internal class ActionsRepository : IActionsRepository
 
     public async Task<ActionDto?> GetActionAsync(Guid id, CancellationToken cancellationToken)
     {
+        var remoteActionData = await _actionsRemoteRepository.GetActionAsync(id, cancellationToken);
+        if (remoteActionData != null)
+        {
+            await _localStorage.SetItemAsync($"{_prefix}{id}", _mapper.Map<ActionDto>(remoteActionData), cancellationToken);
+        }
+
         return await _localStorage.GetItemAsync<ActionDto>($"{_prefix}{id}", cancellationToken);
     }
 
-    public async Task<IEnumerable<ActionDto>> GetActionsAsync(CancellationToken cancellationToken)
+    public async Task<IEnumerable<ActionDto>> GetActionsAsync(IEnumerable<Guid> typeIds, CancellationToken cancellationToken)
     {
+        var remoteActionsData = await _actionsRemoteRepository.GetActionsAsync(typeIds, cancellationToken);
+
+
         var keys = await _localStorage.KeysAsync(cancellationToken);
         var actionKeys = keys.Where(key => key.StartsWith(_prefix));
 
