@@ -15,5 +15,7 @@ public class ActionsListBase : ComponentBase
         await base.OnInitializedAsync();
 
         Actions = await ActionsRepository.GetActionsAsync(new List<Guid>(0), CancellationToken.None);
+
+        StateHasChanged();
     }
 }

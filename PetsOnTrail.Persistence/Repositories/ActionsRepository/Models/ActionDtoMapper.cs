@@ -24,6 +24,31 @@ internal static class ActionDtoMapper
         typeAdapterConfig.NewConfig<RacerDto, RacerDto>();
         typeAdapterConfig.NewConfig<TermDto, TermDto>();
 
+        typeAdapterConfig.NewConfig<GetActionsResponse.ActionDto, ActionDto>()
+            .MapWith(s => new ActionDto
+            {
+                Id = s.Id,
+                TypeId = s.TypeId,
+                Name = s.Name,
+                Description = s.Description,
+                Term = new ActionDto.TermDto
+                {
+                    From = s.From,
+                    To = s.To
+                },
+                Address = new ActionDto.AddressDto
+                {
+                    Country = s.Country,
+                    City = s.City,
+                    Street = s.Address,
+                    Position = new ActionDto.LatLngDto
+                    {
+                        Latitude = s.Latitude,
+                        Longitude = s.Longitude
+                    }
+                }
+            });
+
         return typeAdapterConfig;
     }
 }

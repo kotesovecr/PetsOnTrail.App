@@ -127,7 +127,13 @@ internal class ActionsRepository : IActionsRepository
     public async Task<IEnumerable<ActionDto>> GetActionsAsync(IEnumerable<Guid> typeIds, CancellationToken cancellationToken)
     {
         var remoteActionsData = await _actionsRemoteRepository.GetActionsAsync(typeIds, cancellationToken);
-
+        
+        foreach (var action in remoteActionsData.Actions)
+        {
+            // only add new one. If already exists, do not add
+            if (await _localStorage.ContainKeyAsync($"{_prefix}{action.Id}") == false)
+                await _localStorage.SetItemAsync($"{_prefix}{action.Id}", _mapper.Map<ActionDto>(action), cancellationToken);
+        }
 
         var keys = await _localStorage.KeysAsync(cancellationToken);
         var actionKeys = keys.Where(key => key.StartsWith(_prefix));

@@ -6,4 +6,15 @@
 
 <p>This is the ActionDetail page.</p>
 
-<div>@ActionId</div>
+<h1>@ActionId</h1>
+
+@if (Action != null)
+{
+    <h2>@Action.Name</h2>
+    <h3>@Action.Description</h3>
+    <h4>@Action.Term?.From - @Action.Term?.To</h4>
+}
+else
+{
+    <p><em>Loading...</em></p>
+}
