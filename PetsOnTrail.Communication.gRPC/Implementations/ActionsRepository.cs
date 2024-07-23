@@ -1,6 +1,5 @@
 ﻿using MapsterMapper;
 using PetsOnTrail.Communication.gRPC.Interfaces;
-using PetsOnTrail.Communication.gRPC.Models;
 using Protos.Actions.GetAction;
 using Protos.Actions.GetActions;
 using static Protos.Actions.Actions;
