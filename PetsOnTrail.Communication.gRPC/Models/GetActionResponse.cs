@@ -120,7 +120,6 @@ public sealed record RequestedPaymentsDto
 
 public sealed record RequestedPaymentItem
 {
-    public Guid Id { get; init; }
     public string Name { get; init; }
     public double Price { get; init; }
     public string Currency { get; init; }

@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using static Google.Rpc.Context.AttributeContext.Types;
 
 namespace PetsOnTrail.Communication.gRPC.Models;
 
@@ -18,6 +19,8 @@ internal static class GetActionResponseMapper
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.PetDto, PetDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.PassedCheckpointDto, PassedCheckpointDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.PaymentDefinitionDto, PaymentDefinitionDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.RequestedPaymentsDto, RequestedPaymentsDto>();
+        typeAdapterConfig.NewConfig<Protos.Actions.GetAction.RequestedPaymentItem, RequestedPaymentItem>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.PaymentDto, PaymentDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.RaceDto, RaceDto>();
         typeAdapterConfig.NewConfig<Protos.Actions.GetAction.RacerDto, RacerDto>();
